@@ -11,6 +11,10 @@ import com.example.passgenerator.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     var checkedThemeGlobal = false
+    var length = 10
+    var checkedUpper = false
+    var checkedLower = false
+    var checkedDigits = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,7 +53,82 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun randomPass(view: View?) {
+        setAllParameters()
 
+        var allowedChars = ('0'..'9') + ('A'..'Z')
+
+
+        fun getRandomString(length: Int): String {
+
+            if (checkedUpper && !checkedLower && !checkedDigits) {
+                Toast.makeText(applicationContext, "chama", Toast.LENGTH_SHORT).show()
+                var allowedChars = ('A'..'Z')
+                return sequenceChars(allowedChars)
+
+            } else if (!checkedUpper && checkedLower && !checkedDigits) {
+                var allowedChars = ('a'..'a')
+                return sequenceChars(allowedChars)
+
+
+            } else if (!checkedUpper && !checkedLower && checkedDigits) {
+                var allowedChars = ('0'..'9')
+                return sequenceChars(allowedChars)
+
+            } else if (checkedUpper && checkedLower && checkedDigits) {
+                var allowedChars = ('0'..'9') + ('A'..'Z') + ('a'..'z')
+                return sequenceCharList(allowedChars)
+
+
+            } else if (checkedUpper && checkedLower && !checkedDigits) {
+                var allowedChars = ('A'..'Z') + ('a'..'z')
+                return sequenceCharList(allowedChars)
+
+
+            } else if (!checkedUpper && checkedLower && checkedDigits) {
+                var allowedChars = ('a'..'z') + ('0'..'9')
+                return sequenceCharList(allowedChars)
+
+
+            } else if (checkedUpper && !checkedLower && checkedDigits) {
+                var allowedChars = ('0'..'9') + ('A'..'Z')
+                return sequenceCharList(allowedChars)
+            }
+
+            return "chama"
+        }
+
+        var passValue = getRandomString(length)
+        setPassTextValue(passValue)
     }
 
+    fun sequenceChars(allowedChars: CharRange): String {
+        return (1..length)
+            .map { allowedChars.random() }
+            .joinToString("")
+    }
+
+    fun sequenceCharList(allowedChars: List<Char>): String {
+        return (1..length)
+            .map { allowedChars.random() }
+            .joinToString("")
+    }
+
+    fun setPassTextValue(pass: String) {
+        binding.passwordText.text = convertPassLenght(pass)
+    }
+
+    fun convertPassLenght(pass: String): String {
+        if (pass.length > 10) {
+            return "${pass.substring(0, 10)}..."
+        } else {
+            return pass
+        }
+    }
+
+    fun setAllParameters() {
+        length = binding.passwordLenght.text.toString().toInt()
+        checkedUpper = binding.switchUpper.isChecked
+        checkedLower = binding.switchLower.isChecked
+        checkedDigits = binding.switchDigits.isChecked
+    }
 }
