@@ -12,9 +12,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     var checkedThemeGlobal = false
     var length = 10
-    var checkedUpper = false
-    var checkedLower = false
-    var checkedDigits = false
+    var checkedUpper = true
+    var checkedLower = true
+    var checkedDigits = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,6 +28,9 @@ class MainActivity : AppCompatActivity() {
             checkedThemeGlobal = checked
         }
 
+        binding.switchUpper.isChecked = true
+        binding.switchLower.isChecked = true
+        binding.switchDigits.isChecked = true
         // Set them on startup
         setTheme()
     }
@@ -61,12 +64,11 @@ class MainActivity : AppCompatActivity() {
         fun getRandomString(length: Int): String {
 
             if (checkedUpper && !checkedLower && !checkedDigits) {
-                Toast.makeText(applicationContext, "chama", Toast.LENGTH_SHORT).show()
                 var allowedChars = ('A'..'Z')
                 return sequenceChars(allowedChars)
 
             } else if (!checkedUpper && checkedLower && !checkedDigits) {
-                var allowedChars = ('a'..'a')
+                var allowedChars = ('a'..'z')
                 return sequenceChars(allowedChars)
 
 
@@ -94,7 +96,7 @@ class MainActivity : AppCompatActivity() {
                 return sequenceCharList(allowedChars)
             }
 
-            return "chama"
+            return " "
         }
 
         var passValue = getRandomString(length)
