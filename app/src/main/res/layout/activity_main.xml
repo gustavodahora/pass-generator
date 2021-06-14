@@ -100,7 +100,7 @@
         app:layout_constraintTop_toBottomOf="@+id/switchLower" />
 
     <Switch
-        android:id="@+id/switch5"
+        android:id="@+id/switchSpecial"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
@@ -149,8 +149,8 @@
         app:layout_constraintTop_toTopOf="@+id/switchDigits" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
-        android:layout_width="250dp"
+        android:id="@+id/special"
+        android:layout_width="220dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
         android:layout_marginLeft="12dp"
@@ -158,7 +158,7 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:text='~!@#$%^&amp;*+-/.,\{}[]();:|?="`'
-        app:layout_constraintStart_toEndOf="@+id/switch5"
+        app:layout_constraintStart_toEndOf="@+id/switchSpecial"
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
     <EditText
@@ -187,5 +187,13 @@
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button" />
+
+    <ImageButton
+        android:id="@+id/imageButton2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/ic_baseline_settings_backup_restore_24"
+        tools:layout_editor_absoluteX="340dp"
+        tools:layout_editor_absoluteY="555dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,4 +1,3 @@
-
 package com.example.passgenerator
 
 import androidx.appcompat.app.AppCompatActivity
@@ -16,6 +15,7 @@ class MainActivity : AppCompatActivity() {
     var checkedUpper = true
     var checkedLower = true
     var checkedDigits = true
+    var checkedSpecial = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +32,8 @@ class MainActivity : AppCompatActivity() {
         binding.switchUpper.isChecked = true
         binding.switchLower.isChecked = true
         binding.switchDigits.isChecked = true
+        binding.switchSpecial.isChecked = true
+
         // Set them on startup
         setTheme()
     }
@@ -59,58 +61,59 @@ class MainActivity : AppCompatActivity() {
     fun randomPass(view: View?) {
         setAllParameters()
 
-        var allowedChars = ('0'..'9') + ('A'..'Z')
-
-
         fun getRandomString(length: Int): String {
 
-            if (checkedUpper && !checkedLower && !checkedDigits) {
-                var allowedChars = ('A'..'Z')
-                return sequenceChars(allowedChars)
+//            if (checkedUpper && !checkedLower && !checkedDigits) {
+//                var allowedChars = ('A'..'Z')
+//                return sequenceChars(allowedChars)
+//
+//            }
 
-            } else if (!checkedUpper && checkedLower && !checkedDigits) {
-                var allowedChars = ('a'..'z')
-                return sequenceChars(allowedChars)
+            var upperCase = ""
+            var lowerCase = ""
+            var digits = ""
+            var characters = ""
 
-
-            } else if (!checkedUpper && !checkedLower && checkedDigits) {
-                var allowedChars = ('0'..'9')
-                return sequenceChars(allowedChars)
-
-            } else if (checkedUpper && checkedLower && checkedDigits) {
-                var allowedChars = ('0'..'9') + ('A'..'Z') + ('a'..'z')
-                return sequenceCharList(allowedChars)
-
-
-            } else if (checkedUpper && checkedLower && !checkedDigits) {
-                var allowedChars = ('A'..'Z') + ('a'..'z')
-                return sequenceCharList(allowedChars)
-
-
-            } else if (!checkedUpper && checkedLower && checkedDigits) {
-                var allowedChars = ('a'..'z') + ('0'..'9')
-                return sequenceCharList(allowedChars)
-
-
-            } else if (checkedUpper && !checkedLower && checkedDigits) {
-                var allowedChars = ('0'..'9') + ('A'..'Z')
-                return sequenceCharList(allowedChars)
+            if (checkedUpper) {
+                upperCase = "ABCDEFGHIJKLMNOPQRSTUVXZ"
+            } else {
+                upperCase = ""
             }
 
-            return " "
+            if (checkedLower) {
+                lowerCase = "abcdefghijklmnopqrstuvxz"
+            } else {
+                lowerCase = ""
+            }
+
+            if (checkedDigits) {
+                digits = "0123456789"
+            } else {
+                digits = ""
+            }
+
+            if (checkedSpecial) {
+                characters = binding.special.getText().toString()
+            } else {
+                characters = ""
+            }
+
+            var finalCharacters = upperCase + lowerCase + digits + characters
+
+            return if (finalCharacters != "") {
+                getRandomValue(finalCharacters)
+            } else {
+                "..."
+            }
+
         }
 
         var passValue = getRandomString(length)
         setPassTextValue(passValue)
+
     }
 
-    fun sequenceChars(allowedChars: CharRange): String {
-        return (1..length)
-            .map { allowedChars.random() }
-            .joinToString("")
-    }
-
-    fun sequenceCharList(allowedChars: List<Char>): String {
+    fun getRandomValue(allowedChars: String): String {
         return (1..length)
             .map { allowedChars.random() }
             .joinToString("")
@@ -133,5 +136,6 @@ class MainActivity : AppCompatActivity() {
         checkedUpper = binding.switchUpper.isChecked
         checkedLower = binding.switchLower.isChecked
         checkedDigits = binding.switchDigits.isChecked
+        checkedSpecial = binding.switchSpecial.isChecked
     }
 }
