@@ -16,6 +16,7 @@ class MainActivity : AppCompatActivity() {
     var checkedLower = true
     var checkedDigits = true
     var checkedSpecial = true
+    var characters = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -72,7 +73,7 @@ class MainActivity : AppCompatActivity() {
             var upperCase = ""
             var lowerCase = ""
             var digits = ""
-            var characters = ""
+            characters = ""
 
             if (checkedUpper) {
                 upperCase = "ABCDEFGHIJKLMNOPQRSTUVXZ"
@@ -93,7 +94,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             if (checkedSpecial) {
-                characters = binding.special.getText().toString()
+                getSpecialCharacter()
             } else {
                 characters = ""
             }
@@ -137,5 +138,14 @@ class MainActivity : AppCompatActivity() {
         checkedLower = binding.switchLower.isChecked
         checkedDigits = binding.switchDigits.isChecked
         checkedSpecial = binding.switchSpecial.isChecked
+    }
+
+    fun getSpecialCharacter() {
+        characters = binding.special.getText().toString()
+    }
+
+    fun resetSpecialCharacters(v: View?) {
+        characters = "~!@#$%^&;*+-/.,\\{}[]();:|?=\"`"
+        binding.special.setText(characters)
     }
 }
