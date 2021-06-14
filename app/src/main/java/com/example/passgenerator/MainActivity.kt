@@ -1,10 +1,14 @@
 package com.example.passgenerator
 
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 import android.graphics.PorterDuff
 import android.os.Bundle
 import android.preference.PreferenceManager
 import android.view.View
 import android.widget.Switch
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import com.example.passgenerator.databinding.ActivityMainBinding
@@ -189,5 +193,13 @@ class MainActivity : AppCompatActivity() {
         binding.forceUseLabel.setTextColor(resources.getColor(R.color.teal_200))
     }
 
+    fun copy(view: View) {
+        var textField = binding.passwordText.getText().toString()
+        val clipboardManager = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        val clip = ClipData.newPlainText("label", textField)
+        clipboardManager.setPrimaryClip(clip)
+        Toast.makeText(getApplicationContext(), "$textField copiado para o clipboard",
+            Toast.LENGTH_SHORT).show()
+    }
 
 }
