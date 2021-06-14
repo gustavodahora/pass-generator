@@ -18,7 +18,6 @@ class MainActivity : AppCompatActivity() {
     var checkedLower = true
     var checkedDigits = true
     var checkedSpecial = true
-//    var checkedForce = true
     var strong = true
     var characters = ""
 
