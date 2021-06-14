@@ -2,30 +2,49 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    style="t"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:onClick="strongPassword"
     tools:context=".MainActivity">
 
-    <Switch
-        android:id="@+id/switchLower"
+    <TextView
+        android:id="@+id/force_use_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="20dp"
+        android:text="Strong password"
+        android:textColor="@color/teal_200"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/force_use"
+        app:layout_constraintTop_toBottomOf="@+id/switchSpecial" />
+
+
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/switchLower"
+        android:layout_width="54dp"
+        android:layout_height="18dp"
         android:layout_marginStart="40dp"
+        android:onClick="strongPassword"
         android:layout_marginLeft="40dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/switch_upper" />
 
-    <Switch
+    <com.google.android.material.switchmaterial.SwitchMaterial
         android:id="@+id/switch_upper"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="54dp"
+        android:layout_height="18dp"
         android:layout_marginStart="40dp"
         android:layout_marginLeft="40dp"
         android:layout_marginTop="28dp"
+        android:onClick="strongPassword"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-    <Switch
+    <com.google.android.material.switchmaterial.SwitchMaterial
         android:id="@+id/darkTheme"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -90,22 +109,24 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/passwordText" />
 
-    <Switch
+    <com.google.android.material.switchmaterial.SwitchMaterial
         android:id="@+id/switchDigits"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="54dp"
+        android:layout_height="18dp"
         android:layout_marginStart="40dp"
         android:layout_marginLeft="40dp"
+        android:onClick="strongPassword"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/switchLower" />
 
-    <Switch
+    <com.google.android.material.switchmaterial.SwitchMaterial
         android:id="@+id/switchSpecial"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="54dp"
+        android:layout_height="18dp"
         android:layout_marginStart="40dp"
         android:layout_marginLeft="40dp"
         android:layout_marginTop="16dp"
+        android:onClick="strongPassword"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/switchDigits" />
 
@@ -167,10 +188,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:maxLength="2"
         android:layout_marginTop="28dp"
         android:ems="10"
         android:inputType="number"
+        android:maxLength="2"
         android:text="10"
         app:layout_constraintStart_toEndOf="@+id/textView"
         app:layout_constraintTop_toBottomOf="@+id/button" />
@@ -199,5 +220,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView5"
         app:srcCompat="@drawable/ic_baseline_settings_backup_restore_24" />
+
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/force_use"
+        android:layout_width="54dp"
+        android:layout_height="18dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="12dp"
+        android:onClick="strongPassword"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/special"
+        style="@style/Theme.Switch"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

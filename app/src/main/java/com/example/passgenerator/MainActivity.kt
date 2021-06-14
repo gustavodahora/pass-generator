@@ -1,12 +1,14 @@
 package com.example.passgenerator
 
-import androidx.appcompat.app.AppCompatActivity
+import android.graphics.PorterDuff
 import android.os.Bundle
 import android.preference.PreferenceManager
 import android.view.View
-import android.widget.Toast
+import android.widget.Switch
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import com.example.passgenerator.databinding.ActivityMainBinding
+
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -16,6 +18,8 @@ class MainActivity : AppCompatActivity() {
     var checkedLower = true
     var checkedDigits = true
     var checkedSpecial = true
+//    var checkedForce = true
+    var strong = true
     var characters = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,6 +41,7 @@ class MainActivity : AppCompatActivity() {
 
         // Set them on startup
         setTheme()
+        setStrong()
     }
 
 
@@ -148,4 +153,42 @@ class MainActivity : AppCompatActivity() {
         characters = "~!@#$%^&;*+-/.,\\{}[]();:|?=\"`"
         binding.special.setText(characters)
     }
+
+    fun strongPassword(v: View?) {
+        setStrong()
+
+        var allChecked = checkedUpper && checkedLower && checkedDigits && checkedSpecial
+
+        if (!allChecked) {
+            setStrongFalse()
+        }
+    }
+
+    fun setStrong() {
+        var strong = binding.forceUse.isChecked
+
+
+
+        if (strong) {
+            binding.switchUpper.isChecked = true
+            binding.switchLower.isChecked = true
+            binding.switchDigits.isChecked = true
+            binding.switchSpecial.isChecked = true
+
+            checkedUpper = true
+            checkedLower = true
+            checkedDigits = true
+            checkedSpecial = true
+            binding.forceUseLabel.setTextColor(resources.getColor(R.color.yellow))
+        } else {
+            binding.forceUseLabel.setTextColor(resources.getColor(R.color.teal_200))
+        }
+    }
+
+    fun setStrongFalse() {
+        binding.forceUse.isChecked = false
+        binding.forceUseLabel.setTextColor(resources.getColor(R.color.teal_200))
+    }
+
+
 }
