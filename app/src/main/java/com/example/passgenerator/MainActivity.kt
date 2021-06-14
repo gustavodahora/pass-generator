@@ -42,6 +42,8 @@ class MainActivity : AppCompatActivity() {
         // Set them on startup
         setTheme()
         setStrong()
+        binding.forceUse.isChecked = true
+        binding.forceUseLabel.setTextColor(resources.getColor(R.color.yellow))
     }
 
 
@@ -165,9 +167,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun setStrong() {
-        var strong = binding.forceUse.isChecked
-
-
+        strong = binding.forceUse.isChecked
 
         if (strong) {
             binding.switchUpper.isChecked = true
