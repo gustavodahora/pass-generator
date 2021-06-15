@@ -5,7 +5,6 @@
     style="t"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:onClick="strongPassword"
     tools:context=".MainActivity">
 
     <TextView
@@ -28,8 +27,8 @@
         android:layout_width="54dp"
         android:layout_height="18dp"
         android:layout_marginStart="40dp"
-        android:onClick="strongPassword"
         android:layout_marginLeft="40dp"
+        android:onClick="strongPassword"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/switch_upper" />
 
@@ -76,7 +75,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="64dp"
         android:layout_marginLeft="64dp"
-        android:layout_marginTop="180dp"
+        android:layout_marginTop="160dp"
         android:gravity="center"
         android:text="@string/passTemporary"
         android:textColor="?android:attr/textColorPrimary"
@@ -92,7 +91,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginLeft="24dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="24dp"
         android:layout_marginRight="24dp"
         android:orientation="horizontal"
@@ -110,6 +109,7 @@
             android:layout_marginRight="10dp"
             android:layout_weight="1"
             android:drawableRight="@drawable/ic_baseline_content_copy_24"
+            android:onClick="copy"
             android:text="Copy" />
 
         <Button
@@ -122,6 +122,7 @@
             android:layout_marginRight="40dp"
             android:layout_weight="1"
             android:drawableRight="@drawable/ic_baseline_layers_clear_24"
+            android:onClick="clear"
             android:text="CLEAR"
             android:textColorHighlight="@color/teal_700"
             android:textColorLink="@color/teal_700"
@@ -132,12 +133,11 @@
         android:id="@+id/imageButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="180dp"
         android:layout_marginEnd="24dp"
         android:layout_marginRight="24dp"
         android:onClick="randomPass"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/app_title"
+        app:layout_constraintTop_toTopOf="@+id/passwordText"
         app:srcCompat="@drawable/ic_baseline_autorenew_24" />
 
     <com.google.android.material.switchmaterial.SwitchMaterial
@@ -259,11 +259,10 @@
         android:layout_marginStart="40dp"
         android:layout_marginLeft="40dp"
         android:layout_marginTop="12dp"
-        android:theme="@style/BrandedSwitch"
         android:onClick="strongPassword"
+        android:theme="@style/BrandedSwitch"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/special"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/special" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,11 +3,9 @@ package com.example.passgenerator
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
-import android.graphics.PorterDuff
 import android.os.Bundle
 import android.preference.PreferenceManager
 import android.view.View
-import android.widget.Switch
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
@@ -72,56 +70,8 @@ class MainActivity : AppCompatActivity() {
     fun randomPass(view: View?) {
         setAllParameters()
 
-        fun getRandomString(length: Int): String {
-
-//            if (checkedUpper && !checkedLower && !checkedDigits) {
-//                var allowedChars = ('A'..'Z')
-//                return sequenceChars(allowedChars)
-//
-//            }
-
-            var upperCase = ""
-            var lowerCase = ""
-            var digits = ""
-            characters = ""
-
-            if (checkedUpper) {
-                upperCase = "ABCDEFGHIJKLMNOPQRSTUVXZ"
-            } else {
-                upperCase = ""
-            }
-
-            if (checkedLower) {
-                lowerCase = "abcdefghijklmnopqrstuvxz"
-            } else {
-                lowerCase = ""
-            }
-
-            if (checkedDigits) {
-                digits = "0123456789"
-            } else {
-                digits = ""
-            }
-
-            if (checkedSpecial) {
-                getSpecialCharacter()
-            } else {
-                characters = ""
-            }
-
-            var finalCharacters = upperCase + lowerCase + digits + characters
-
-            return if (finalCharacters != "") {
-                getRandomValue(finalCharacters)
-            } else {
-                "..."
-            }
-
-        }
-
         var passValue = getRandomString(length)
         setPassTextValue(passValue)
-
     }
 
     fun getRandomValue(allowedChars: String): String {
@@ -131,7 +81,47 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun setPassTextValue(pass: String) {
-        binding.passwordText.text = convertPassLenght(pass)
+        // Ter pelo menos 1 letra maiuscula e minuscula
+        // ter pelo menos 1 digito
+        // ter pelo menos 2 caracteres especiais
+//
+
+        if (characters != "~!@#$%^&;*+-/.,\\{}[]();:|?=\"`") {
+            strong = false
+            setStrongFalse()
+        }
+
+        if (strong) {
+            var passUpper = false
+            var passLower = false
+            var passDigits = false
+            var passCharacters = true
+            pass.forEach {
+                if (it.isUpperCase()) {
+                    passUpper = true
+                }
+                if (it.isLowerCase()) {
+                    passLower = true
+                }
+                if (it.isDigit()) {
+                    passDigits = true
+                }
+                var chama = "~!@#$%^&;*+-/.,\\{}[]();:|?=\"`"
+                for (i in chama) {
+                    if (i == it) {
+                        passCharacters = true
+                    }
+                }
+            }
+            if (passUpper && passLower && passDigits && passCharacters) {
+                binding.passwordText.text = convertPassLenght(pass)
+            } else {
+                var passValue = getRandomString(length)
+                setPassTextValue(passValue)
+            }
+        } else {
+            binding.passwordText.text = convertPassLenght(pass)
+        }
     }
 
     fun convertPassLenght(pass: String): String {
@@ -155,14 +145,22 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun resetSpecialCharacters(v: View?) {
-        characters = "~!@#$%^&;*+-/.,\\{}[]();:|?=\"`"
+        if (characters != "~!@#$%^&;*+-/.,\\{}[]();:|?=\"`") {
+            characters = "~!@#$%^&;*+-/.,\\{}[]();:|?=\"`"
+        }
         binding.special.setText(characters)
     }
 
     fun strongPassword(v: View?) {
         setStrong()
 
+        resetSpecialCharacters(v)
+
         var allChecked = checkedUpper && checkedLower && checkedDigits && checkedSpecial
+
+//        if (characters != "~!@#$%^&;*+-/.,\\{}[]();:|?=\"`") {
+//            checkedSpecial = false
+//        }
 
         if (!allChecked) {
             setStrongFalse()
@@ -190,16 +188,69 @@ class MainActivity : AppCompatActivity() {
 
     fun setStrongFalse() {
         binding.forceUse.isChecked = false
+
         binding.forceUseLabel.setTextColor(resources.getColor(R.color.teal_200))
     }
 
     fun copy(view: View) {
         var textField = binding.passwordText.getText().toString()
+        if (textField != "Press >>") {
+            val clipboardManager = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+            val clip = ClipData.newPlainText("label", textField)
+            clipboardManager.setPrimaryClip(clip)
+            Toast.makeText(getApplicationContext(), "$textField copiado para o clipboard",
+                Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    fun clear(v: View) {
         val clipboardManager = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-        val clip = ClipData.newPlainText("label", textField)
+        val clip = ClipData.newPlainText("clear", " ")
         clipboardManager.setPrimaryClip(clip)
-        Toast.makeText(getApplicationContext(), "$textField copiado para o clipboard",
+        Toast.makeText(getApplicationContext(), "Clean",
             Toast.LENGTH_SHORT).show()
     }
+
+    fun getRandomString(length: Int): String {
+
+        var upperCase = ""
+        var lowerCase = ""
+        var digits = ""
+        characters = ""
+
+        if (checkedUpper) {
+            upperCase = "ABCDEFGHIJKLMNOPQRSTUVXZ"
+        } else {
+            upperCase = ""
+        }
+
+        if (checkedLower) {
+            lowerCase = "abcdefghijklmnopqrstuvxz"
+        } else {
+            lowerCase = ""
+        }
+
+        if (checkedDigits) {
+            digits = "0123456789"
+        } else {
+            digits = ""
+        }
+
+        if (checkedSpecial) {
+            getSpecialCharacter()
+        } else {
+            characters = ""
+        }
+
+        var finalCharacters = upperCase + lowerCase + digits + characters
+
+        return if (finalCharacters != "") {
+            getRandomValue(finalCharacters)
+        } else {
+            "..."
+        }
+
+    }
+
 
 }
