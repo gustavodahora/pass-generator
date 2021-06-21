@@ -7,41 +7,78 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/force_use_label"
+
+    <ImageButton
+        android:id="@+id/imageButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginLeft="12dp"
-        android:layout_marginTop="20dp"
-        android:text="Strong password"
-        android:textColor="@color/teal_200"
-        android:textSize="16sp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:onClick="randomPass"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/passwordText"
+        app:srcCompat="@drawable/ic_baseline_autorenew_24" />
+
+    <Button
+        android:id="@+id/copy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_weight="1"
+        android:drawableRight="@drawable/ic_baseline_content_copy_24"
+        android:onClick="copy"
+        android:text="Copy"
+        app:layout_constraintEnd_toStartOf="@+id/guideline3"
+        app:layout_constraintTop_toBottomOf="@+id/passwordText" />
+
+    <Button
+        android:id="@+id/clear"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="24dp"
+        android:layout_weight="1"
+        android:drawableRight="@drawable/ic_baseline_layers_clear_24"
+        android:onClick="clear"
+        android:text="CLEAR"
+        android:textColorHighlight="@color/teal_700"
+        android:textColorLink="@color/teal_700"
+        app:backgroundTint="@color/teal_700"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintTop_toBottomOf="@+id/passwordText" />
+
+    <TextView
+        android:id="@+id/passwordText"
+        android:layout_width="270dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginLeft="36dp"
+        android:layout_marginTop="60dp"
+        android:gravity="center"
+        android:text="@string/passTemporary"
+        android:textColor="?android:attr/textColorPrimary"
+        android:textSize="34sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/force_use"
-        app:layout_constraintTop_toBottomOf="@+id/switchSpecial" />
-
-
-    <com.google.android.material.switchmaterial.SwitchMaterial
-        android:id="@+id/switchLower"
-        android:layout_width="54dp"
-        android:layout_height="18dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginLeft="40dp"
-        android:onClick="strongPassword"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/switch_upper" />
+        app:layout_constraintTop_toBottomOf="@+id/app_title" />
 
-    <com.google.android.material.switchmaterial.SwitchMaterial
-        android:id="@+id/switch_upper"
-        android:layout_width="54dp"
-        android:layout_height="18dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="28dp"
-        android:onClick="strongPassword"
+    <TextView
+        android:id="@+id/app_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginLeft="36dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/app_name"
+        android:textColor="?android:attr/textColorPrimary"
+        android:textSize="34sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toTopOf="parent" />
+
 
     <com.google.android.material.switchmaterial.SwitchMaterial
         android:id="@+id/darkTheme"
@@ -55,214 +92,189 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/app_title"
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3"
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <ScrollView
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:text="@string/app_name"
-        android:textColor="?android:attr/textColorPrimary"
-        android:textSize="34sp"
-        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.363"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/copy">
 
-    <TextView
-        android:id="@+id/passwordText"
-        android:layout_width="270dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
-        android:layout_marginLeft="64dp"
-        android:layout_marginTop="160dp"
-        android:gravity="center"
-        android:text="@string/passTemporary"
-        android:textColor="?android:attr/textColorPrimary"
-        android:textSize="34sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/imageButton"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/app_title" />
-
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginRight="24dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/passwordText">
-
-        <Button
-            android:id="@+id/copy"
-            android:layout_width="70dp"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:layout_marginLeft="40dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginRight="10dp"
             android:layout_weight="1"
-            android:drawableRight="@drawable/ic_baseline_content_copy_24"
-            android:onClick="copy"
-            android:text="Copy" />
+            tools:context=".MainActivity">
 
-        <Button
-            android:id="@+id/clear"
-            android:layout_width="70dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginEnd="40dp"
-            android:layout_marginRight="40dp"
-            android:layout_weight="1"
-            android:drawableRight="@drawable/ic_baseline_layers_clear_24"
-            android:onClick="clear"
-            android:text="CLEAR"
-            android:textColorHighlight="@color/teal_700"
-            android:textColorLink="@color/teal_700"
-            app:backgroundTint="@color/teal_700" />
-    </LinearLayout>
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginLeft="4dp"
+                android:text="Digits (0-9)"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textSize="16sp"
+                app:layout_constraintStart_toEndOf="@+id/switchDigits"
+                app:layout_constraintTop_toTopOf="@+id/switchDigits" />
 
-    <ImageButton
-        android:id="@+id/imageButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
-        android:layout_marginRight="24dp"
-        android:onClick="randomPass"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/passwordText"
-        app:srcCompat="@drawable/ic_baseline_autorenew_24" />
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginLeft="4dp"
+                android:text="Letters Lowercase  (a-z)"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textSize="16sp"
+                app:layout_constraintStart_toEndOf="@+id/switchLower"
+                app:layout_constraintTop_toTopOf="@+id/switchLower" />
 
-    <com.google.android.material.switchmaterial.SwitchMaterial
-        android:id="@+id/switchDigits"
-        android:layout_width="54dp"
-        android:layout_height="18dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginLeft="40dp"
-        android:onClick="strongPassword"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/switchLower" />
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginLeft="4dp"
+                android:text="Letters Uppecase (A-Z)"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textSize="16sp"
+                app:layout_constraintStart_toEndOf="@+id/switch_upper"
+                app:layout_constraintTop_toTopOf="@+id/switch_upper" />
 
-    <com.google.android.material.switchmaterial.SwitchMaterial
-        android:id="@+id/switchSpecial"
-        android:layout_width="54dp"
-        android:layout_height="18dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="16dp"
-        android:onClick="strongPassword"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/switchDigits" />
+            <EditText
+                android:id="@+id/password_lenght"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="4dp"
+                android:ems="10"
+                android:inputType="number"
+                android:maxLength="2"
+                android:text="10"
+                app:layout_constraintStart_toEndOf="@+id/textView"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="13dp"
-        android:layout_marginLeft="13dp"
-        android:layout_marginTop="3dp"
-        android:text="Letters Uppecase (A-Z)"
-        android:textColor="?android:attr/textColorPrimary"
-        android:textSize="16sp"
-        app:layout_constraintStart_toEndOf="@+id/switch_upper"
-        app:layout_constraintTop_toTopOf="@+id/switch_upper" />
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/switchSpecial"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="24dp"
+                android:onClick="strongPassword"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/switchDigits" />
 
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="13dp"
-        android:layout_marginLeft="13dp"
-        android:layout_marginTop="3dp"
-        android:text="Letters Lowercase  (a-z)"
-        android:textColor="?android:attr/textColorPrimary"
-        android:textSize="16sp"
-        app:layout_constraintStart_toEndOf="@+id/switchLower"
-        app:layout_constraintTop_toTopOf="@+id/switchLower" />
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/switchLower"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="4dp"
+                android:onClick="strongPassword"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/switch_upper" />
 
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="13dp"
-        android:layout_marginLeft="13dp"
-        android:layout_marginTop="3dp"
-        android:text="Digits (0-9)"
-        android:textColor="?android:attr/textColorPrimary"
-        android:textSize="16sp"
-        app:layout_constraintStart_toEndOf="@+id/switchDigits"
-        app:layout_constraintTop_toTopOf="@+id/switchDigits" />
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/switch_upper"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:onClick="strongPassword"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-    <EditText
-        android:id="@+id/special"
-        android:layout_width="220dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginLeft="12dp"
-        android:layout_marginTop="8dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text='~!@#$%^&amp;;*+-/.,\\{}[]();:|?="`'
-        app:layout_constraintStart_toEndOf="@+id/switchSpecial"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+            <ImageButton
+                android:id="@+id/imageButton2"
+                android:layout_width="47dp"
+                android:layout_height="44dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:onClick="resetSpecialCharacters"
+                app:layout_constraintStart_toEndOf="@+id/special"
+                app:layout_constraintTop_toTopOf="@+id/special"
+                app:srcCompat="@drawable/ic_baseline_settings_backup_restore_24" />
 
-    <EditText
-        android:id="@+id/password_lenght"
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="32dp"
-        android:ems="10"
-        android:inputType="number"
-        android:maxLength="2"
-        android:text="10"
-        app:layout_constraintStart_toEndOf="@+id/textView"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/force_use"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:onClick="strongPassword"
+                android:theme="@style/BrandedSwitch"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/special" />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="32dp"
-        android:text="Password length:"
-        android:textColor="?android:attr/textColorPrimary"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+            <EditText
+                android:id="@+id/special"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="12dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text='~!@#$%^&amp;;*+-/.,\\{}[]();:|?="`'
+                app:layout_constraintStart_toEndOf="@+id/switchSpecial"
+                app:layout_constraintTop_toBottomOf="@+id/switchDigits" />
 
-    <ImageButton
-        android:id="@+id/imageButton2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginRight="24dp"
-        android:onClick="resetSpecialCharacters"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5"
-        app:srcCompat="@drawable/ic_baseline_settings_backup_restore_24" />
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/switchDigits"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="4dp"
+                android:onClick="strongPassword"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/switchLower" />
 
-    <com.google.android.material.switchmaterial.SwitchMaterial
-        android:id="@+id/force_use"
-        android:layout_width="54dp"
-        android:layout_height="18dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="12dp"
-        android:onClick="strongPassword"
-        android:theme="@style/BrandedSwitch"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/special" />
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="16dp"
+                android:text="Password length:"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/force_use_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="20dp"
+                android:text="Strong password"
+                android:textColor="@color/teal_200"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/force_use"
+                app:layout_constraintTop_toBottomOf="@+id/special" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
