@@ -7,6 +7,34 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <TextView
+        android:id="@+id/app_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginLeft="36dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/app_name"
+        android:textColor="?android:attr/textColorPrimary"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/darkTheme"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/darkTheme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:drawableLeft="@drawable/ic_baseline_bedtime_24"
+        android:onClick="theme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/app_title"
+        android:drawableStart="@drawable/ic_baseline_bedtime_24" />
 
     <ImageButton
         android:id="@+id/imageButton"
@@ -17,7 +45,8 @@
         android:onClick="randomPass"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/passwordText"
-        app:srcCompat="@drawable/ic_baseline_autorenew_24" />
+        app:srcCompat="@drawable/ic_baseline_autorenew_24"
+        android:contentDescription="@string/get_a_new_password" />
 
     <Button
         android:id="@+id/copy"
@@ -27,12 +56,12 @@
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:layout_weight="1"
+        android:drawableEnd="@drawable/ic_baseline_content_copy_24"
         android:drawableRight="@drawable/ic_baseline_content_copy_24"
         android:onClick="copy"
         android:text="@string/copy"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
-        app:layout_constraintTop_toBottomOf="@+id/passwordText"
-        android:drawableEnd="@drawable/ic_baseline_content_copy_24" />
+        app:layout_constraintTop_toBottomOf="@+id/passwordText" />
 
     <Button
         android:id="@+id/clear"
@@ -49,7 +78,8 @@
         android:textColorLink="@color/teal_700"
         app:backgroundTint="@color/teal_700"
         app:layout_constraintStart_toStartOf="@+id/guideline3"
-        app:layout_constraintTop_toBottomOf="@+id/passwordText" />
+        app:layout_constraintTop_toBottomOf="@+id/passwordText"
+        android:drawableEnd="@drawable/ic_baseline_layers_clear_24" />
 
     <TextView
         android:id="@+id/passwordText"
@@ -66,32 +96,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/app_title" />
 
-    <TextView
-        android:id="@+id/app_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="36dp"
-        android:layout_marginLeft="36dp"
-        android:layout_marginTop="24dp"
-        android:text="@string/app_name"
-        android:textColor="?android:attr/textColorPrimary"
-        android:textSize="34sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
 
-    <com.google.android.material.switchmaterial.SwitchMaterial
-        android:id="@+id/darkTheme"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:drawableLeft="@drawable/ic_baseline_bedtime_24"
-        android:onClick="theme"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+
+
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline3"
@@ -100,164 +108,172 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.5" />
 
-    <ScrollView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="24dp"
+    <TextView
+        android:id="@+id/password_lenght_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/password_length"
+        android:textColor="?android:attr/textColorPrimary"
+        android:textSize="20sp"
         android:layout_marginLeft="24dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginRight="24dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/pass_length"
+        app:layout_constraintBottom_toBottomOf="@id/pass_length"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/copy">
+        app:layout_constraintEnd_toStartOf="@+id/pass_length"
+        android:layout_marginStart="24dp" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+    <EditText
+        android:id="@+id/pass_length"
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="number"
+        android:maxLength="2"
+        android:text="@string/_10"
+        app:layout_constraintStart_toEndOf="@+id/password_lenght_label"
+        app:layout_constraintTop_toBottomOf="@+id/copy"
+        android:layout_marginTop="10dp"
+        android:autofillHints="@string/_10"
+        android:hint="@string/length_of_characters"/>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/switch_upper"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:onClick="strongPassword"
+        app:layout_constraintTop_toTopOf="@+id/switch_uppercase_label"
+        app:layout_constraintBottom_toBottomOf="@id/switch_uppercase_label"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginStart="24dp"
+        app:layout_constraintEnd_toStartOf="@+id/switch_uppercase_label"
+        />
 
-                <TextView
-                    android:id="@+id/textView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Password length:"
-                    android:textColor="?android:attr/textColorPrimary"
-                    android:textSize="20sp" />
+    <TextView
+        android:id="@+id/switch_uppercase_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/letters_uppercase_a_z"
+        android:textColor="?android:attr/textColorPrimary"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@+id/password_lenght_label"
+        app:layout_constraintStart_toEndOf="@id/switchLower"
+        android:layout_marginTop="15dp"/>
 
-                <EditText
-                    android:id="@+id/password_lenght"
-                    android:layout_width="40dp"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:inputType="number"
-                    android:maxLength="2"
-                    android:text="@string/_10" />
-            </LinearLayout>
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/switchLower"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:onClick="strongPassword"
+        app:layout_constraintTop_toTopOf="@+id/letters_lowercase_label"
+        app:layout_constraintBottom_toBottomOf="@id/letters_lowercase_label"
+        app:layout_constraintEnd_toStartOf="@+id/letters_lowercase_label"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginStart="24dp" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
+    <TextView
+        android:id="@+id/letters_lowercase_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/letters_lowercase_a_z"
+        android:textColor="?android:attr/textColorPrimary"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@+id/switch_upper"
+        app:layout_constraintStart_toEndOf="@id/switchLower"
+        android:layout_marginTop="4dp"
+        />
 
-                <com.google.android.material.switchmaterial.SwitchMaterial
-                    android:id="@+id/switch_upper"
-                    android:layout_width="wrap_content"
-                    android:layout_height="20dp"
-                    android:onClick="strongPassword" />
 
-                <TextView
-                    android:id="@+id/textView3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Letters Uppecase (A-Z)"
-                    android:textColor="?android:attr/textColorPrimary"
-                    android:textSize="16sp" />
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/switchDigits"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:onClick="strongPassword"
+        app:layout_constraintTop_toTopOf="@+id/digits_label"
+        app:layout_constraintBottom_toBottomOf="@id/digits_label"
+        app:layout_constraintEnd_toStartOf="@+id/digits_label"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginLeft="24dp"
+        android:layout_marginStart="24dp"
+        />
 
-            </LinearLayout>
+    <TextView
+        android:id="@+id/digits_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/digits_0_9"
+        android:textColor="?android:attr/textColorPrimary"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@+id/switchLower"
+        app:layout_constraintStart_toEndOf="@id/switchLower"
+        android:layout_marginTop="4dp"/>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="5dp"
-                android:orientation="horizontal">
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/switchSpecial"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:onClick="strongPassword"
+        app:layout_constraintTop_toTopOf="@+id/special"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/special"
+        android:layout_marginLeft="24dp"
+        android:layout_marginStart="24dp"
+        app:layout_constraintBottom_toBottomOf="@id/special"/>
 
-                <com.google.android.material.switchmaterial.SwitchMaterial
-                    android:id="@+id/switchLower"
-                    android:layout_width="wrap_content"
-                    android:layout_height="20dp"
-                    android:onClick="strongPassword" />
+    <EditText
+        android:id="@+id/special"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="@string/amp"
+        app:layout_constraintTop_toBottomOf="@+id/digits_label"
+        app:layout_constraintStart_toEndOf="@id/switchSpecial"
+        app:layout_constraintEnd_toStartOf="@+id/restore_special"
+        android:layout_marginTop="4dp"
+        android:hint="@string/special_characters_selected"
+        android:autofillHints="@string/special_characters_selected" />
 
-                <TextView
-                    android:id="@+id/textView4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/letters_lowercase_a_z"
-                    android:textColor="?android:attr/textColorPrimary"
-                    android:textSize="16sp" />
+    <ImageButton
+        android:id="@+id/restore_special"
+        android:layout_width="47dp"
+        android:layout_height="44dp"
+        android:onClick="resetSpecialCharacters"
+        app:srcCompat="@drawable/ic_baseline_settings_backup_restore_24"
+        app:layout_constraintTop_toTopOf="@id/special"
+        app:layout_constraintStart_toEndOf="@id/special"
+        app:layout_constraintBottom_toBottomOf="@+id/special"
+        android:layout_marginLeft="4dp"
+        android:layout_marginStart="4dp"
+        android:contentDescription="@string/restore_text_special" />
 
-            </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="5dp"
-                android:orientation="horizontal">
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/force_use"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:onClick="strongPassword"
+        android:theme="@style/BrandedSwitch"
+        app:layout_constraintTop_toTopOf="@+id/force_use_label"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/force_use_label"
+        app:layout_constraintEnd_toStartOf="@+id/force_use_label"
+        android:layout_marginLeft="24dp"
+        android:layout_marginStart="24dp" />
 
-                <com.google.android.material.switchmaterial.SwitchMaterial
-                    android:id="@+id/switchDigits"
-                    android:layout_width="wrap_content"
-                    android:layout_height="20dp"
-                    android:onClick="strongPassword" />
-
-                <TextView
-                    android:id="@+id/textView5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Digits (0-9)"
-                    android:textColor="?android:attr/textColorPrimary"
-                    android:textSize="16sp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <com.google.android.material.switchmaterial.SwitchMaterial
-                    android:id="@+id/switchSpecial"
-                    android:layout_width="wrap_content"
-                    android:layout_height="20dp"
-                    android:onClick="strongPassword" />
-
-                <EditText
-                    android:id="@+id/special"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:inputType="textPersonName"
-                    android:text="@string/amp" />
-
-                <ImageButton
-                    android:id="@+id/imageButton2"
-                    android:layout_width="47dp"
-                    android:layout_height="44dp"
-                    android:onClick="resetSpecialCharacters"
-                    app:srcCompat="@drawable/ic_baseline_settings_backup_restore_24" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="20dp"
-                android:orientation="horizontal">
-
-                <com.google.android.material.switchmaterial.SwitchMaterial
-                    android:id="@+id/force_use"
-                    android:layout_width="wrap_content"
-                    android:layout_height="20dp"
-                    android:onClick="strongPassword"
-                    android:theme="@style/BrandedSwitch" />
-
-                <TextView
-                    android:id="@+id/force_use_label"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/strong_password"
-                    android:textColor="@color/teal_200"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
-            </LinearLayout>
-        </LinearLayout>
-    </ScrollView>
-
+    <TextView
+        android:id="@+id/force_use_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/strong_password"
+        android:textColor="@color/teal_200"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@+id/special"
+        app:layout_constraintStart_toEndOf="@id/force_use"
+        android:layout_marginTop="4dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

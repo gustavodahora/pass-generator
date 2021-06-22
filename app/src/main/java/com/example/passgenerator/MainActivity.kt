@@ -133,7 +133,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun setAllParameters() {
-        length = binding.passwordLenght.text.toString().toInt()
+        length = binding.passLength.text.toString().toInt()
         checkedUpper = binding.switchUpper.isChecked
         checkedLower = binding.switchLower.isChecked
         checkedDigits = binding.switchDigits.isChecked

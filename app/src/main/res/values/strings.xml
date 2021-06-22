@@ -7,4 +7,11 @@
     <string name="letters_lowercase_a_z">Letters Lowercase (a-z)</string>
     <string name="amp"><![CDATA[~!@#$%^&;*+-/.,\\{}[]();:|?=`]]></string>
     <string name="strong_password">Strong password</string>
+    <string name="password_length">Password length:</string>
+    <string name="letters_uppercase_a_z">Letters Uppecase (A-Z)</string>
+    <string name="digits_0_9">Digits (0-9)</string>
+    <string name="restore_text_special">Restore text special</string>
+    <string name="get_a_new_password">Get a new password</string>
+    <string name="length_of_characters">Length of characters</string>
+    <string name="special_characters_selected">special characters selected</string>
 </resources>
