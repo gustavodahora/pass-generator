@@ -4,7 +4,6 @@ import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
 import android.os.Bundle
-import android.preference.PreferenceManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
@@ -33,7 +32,9 @@ class MainActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        val pref = PreferenceManager.getDefaultSharedPreferences(this)
+        val pref = getSharedPreferences(
+            "dev.gustavodahora.pass_generator", Context.MODE_PRIVATE
+        )
         pref.apply {
             val checked = getBoolean("checked", false)
             checkedThemeGlobal = checked
@@ -71,7 +72,9 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun theme() {
-        val pref = PreferenceManager.getDefaultSharedPreferences(this)
+        val pref = getSharedPreferences(
+            "dev.gustavodahora.pass_generator", Context.MODE_PRIVATE
+        )
         val editor = pref.edit()
         val checked = binding.switchTheme.isChecked
         editor.putBoolean("checked", checked).apply()
