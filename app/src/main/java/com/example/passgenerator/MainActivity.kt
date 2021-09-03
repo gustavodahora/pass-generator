@@ -5,23 +5,27 @@ import android.content.ClipboardManager
 import android.content.Context
 import android.os.Bundle
 import android.preference.PreferenceManager
-import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.content.ContextCompat
 import com.example.passgenerator.databinding.ActivityMainBinding
 
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-    var checkedThemeGlobal = false
-    var length = 10
-    var checkedUpper = true
-    var checkedLower = true
-    var checkedDigits = true
-    var checkedSpecial = true
-    var strong = true
-    var characters = ""
+
+    private var checkedThemeGlobal = false
+
+    private var length = 10
+
+    private var checkedUpper = true
+    private var checkedLower = true
+    private var checkedDigits = true
+    private var checkedSpecial = true
+    private var characters = ""
+
+    private var strong = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,22 +48,38 @@ class MainActivity : AppCompatActivity() {
         setTheme()
         setStrong()
         binding.forceUse.isChecked = true
-        binding.forceUseLabel.setTextColor(resources.getColor(R.color.yellow))
+        binding.forceUseLabel.setTextColor(
+            ContextCompat.getColor(
+                applicationContext,
+                R.color.yellow
+            )
+        )
+
+        // Set the onclick function
+        binding.btnGenerate.setOnClickListener { randomPass() }
+        binding.switchTheme.setOnClickListener { theme() }
+        binding.btnCopy.setOnClickListener { copy() }
+        binding.btnClear.setOnClickListener { clear() }
+        binding.switchUpper.setOnClickListener { strongPassword() }
+        binding.switchDigits.setOnClickListener { strongPassword() }
+        binding.switchSpecial.setOnClickListener { strongPassword() }
+        binding.forceUse.setOnClickListener { strongPassword() }
+        binding.restoreSpecial.setOnClickListener { resetSpecialCharacters() }
     }
 
 
-    fun theme(view: View?) {
+    private fun theme() {
         val pref = PreferenceManager.getDefaultSharedPreferences(this)
         val editor = pref.edit()
-        var checked = binding.darkTheme.isChecked
+        val checked = binding.switchTheme.isChecked
         editor.putBoolean("checked", checked).apply()
         checkedThemeGlobal = checked
         setTheme()
     }
 
     // Set theme
-    fun setTheme() {
-        binding.darkTheme.isChecked = checkedThemeGlobal
+    private fun setTheme() {
+        binding.switchTheme.isChecked = checkedThemeGlobal
         if (checkedThemeGlobal) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         } else {
@@ -67,24 +87,23 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun randomPass(view: View?) {
+    private fun randomPass() {
         setAllParameters()
 
-        var passValue = getRandomString(length)
+        val passValue = getRandomString()
         setPassTextValue(passValue)
     }
 
-    fun getRandomValue(allowedChars: String): String {
+    private fun getRandomValue(allowedChars: String): String {
         return (1..length)
             .map { allowedChars.random() }
             .joinToString("")
     }
 
-    fun setPassTextValue(pass: String) {
-        // Ter pelo menos 1 letra maiuscula e minuscula
-        // ter pelo menos 1 digito
-        // ter pelo menos 2 caracteres especiais
-//
+    private fun setPassTextValue(pass: String) {
+        // 1 letra maiuscula e minuscula
+        // 1 digito
+        // 2 caracteres especiais
 
         if (characters != "~!@#$%^&;*+-/.,\\{}[]();:|?=\"`") {
             strong = false
@@ -106,7 +125,7 @@ class MainActivity : AppCompatActivity() {
                 if (it.isDigit()) {
                     passDigits = true
                 }
-                var chama = "~!@#$%^&;*+-/.,\\{}[]();:|?=\"`"
+                val chama = "~!@#$%^&;*+-/.,\\{}[]();:|?=\"`"
                 for (i in chama) {
                     if (i == it) {
                         passCharacters = true
@@ -116,7 +135,7 @@ class MainActivity : AppCompatActivity() {
             if (passUpper && passLower && passDigits && passCharacters) {
                 binding.passwordText.text = convertPassLenght(pass)
             } else {
-                var passValue = getRandomString(length)
+                val passValue = getRandomString()
                 setPassTextValue(passValue)
             }
         } else {
@@ -124,15 +143,15 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun convertPassLenght(pass: String): String {
-        if (pass.length > 10) {
-            return "${pass.substring(0, 10)}..."
+    private fun convertPassLenght(pass: String): String {
+        return if (pass.length > 10) {
+            "${pass.substring(0, 10)}..."
         } else {
-            return pass
+            pass
         }
     }
 
-    fun setAllParameters() {
+    private fun setAllParameters() {
         length = binding.passLength.text.toString().toInt()
         checkedUpper = binding.switchUpper.isChecked
         checkedLower = binding.switchLower.isChecked
@@ -140,34 +159,30 @@ class MainActivity : AppCompatActivity() {
         checkedSpecial = binding.switchSpecial.isChecked
     }
 
-    fun getSpecialCharacter() {
-        characters = binding.special.getText().toString()
+    private fun getSpecialCharacter() {
+        characters = binding.special.text.toString()
     }
 
-    fun resetSpecialCharacters(v: View?) {
+    private fun resetSpecialCharacters() {
         if (characters != "~!@#$%^&;*+-/.,\\{}[]();:|?=\"`") {
             characters = "~!@#$%^&;*+-/.,\\{}[]();:|?=\"`"
         }
         binding.special.setText(characters)
     }
 
-    fun strongPassword(v: View?) {
+    private fun strongPassword() {
         setStrong()
 
-        resetSpecialCharacters(v)
+        resetSpecialCharacters()
 
-        var allChecked = checkedUpper && checkedLower && checkedDigits && checkedSpecial
-
-//        if (characters != "~!@#$%^&;*+-/.,\\{}[]();:|?=\"`") {
-//            checkedSpecial = false
-//        }
+        val allChecked = checkedUpper && checkedLower && checkedDigits && checkedSpecial
 
         if (!allChecked) {
             setStrongFalse()
         }
     }
 
-    fun setStrong() {
+    private fun setStrong() {
         strong = binding.forceUse.isChecked
 
         if (strong) {
@@ -180,60 +195,75 @@ class MainActivity : AppCompatActivity() {
             checkedLower = true
             checkedDigits = true
             checkedSpecial = true
-            binding.forceUseLabel.setTextColor(resources.getColor(R.color.yellow))
+            binding.forceUseLabel.setTextColor(
+                ContextCompat.getColor(
+                    applicationContext,
+                    R.color.yellow
+                )
+            )
         } else {
-            binding.forceUseLabel.setTextColor(resources.getColor(R.color.teal_200))
+            binding.forceUseLabel.setTextColor(
+                ContextCompat.getColor(
+                    applicationContext,
+                    R.color.teal_200
+                )
+            )
         }
     }
 
-    fun setStrongFalse() {
+    private fun setStrongFalse() {
         binding.forceUse.isChecked = false
 
-        binding.forceUseLabel.setTextColor(resources.getColor(R.color.teal_200))
+        binding.forceUseLabel.setTextColor(
+            ContextCompat.getColor(
+                applicationContext,
+                R.color.teal_200
+            )
+        )
     }
 
-    fun copy(view: View) {
-        var textField = binding.passwordText.getText().toString()
+    private fun copy() {
+        val textField = binding.passwordText.text.toString()
         if (textField != "Press >>") {
             val clipboardManager = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
             val clip = ClipData.newPlainText("label", textField)
             clipboardManager.setPrimaryClip(clip)
-            Toast.makeText(getApplicationContext(), "$textField copiado para o clipboard",
-                Toast.LENGTH_SHORT).show()
+            Toast.makeText(
+                applicationContext, "$textField copiado para o clipboard",
+                Toast.LENGTH_SHORT
+            ).show()
         }
     }
 
-    fun clear(v: View) {
+    private fun clear() {
         val clipboardManager = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
         val clip = ClipData.newPlainText("clear", " ")
         clipboardManager.setPrimaryClip(clip)
-        Toast.makeText(getApplicationContext(), "Clean",
-            Toast.LENGTH_SHORT).show()
+        Toast.makeText(
+            applicationContext, "Clean",
+            Toast.LENGTH_SHORT
+        ).show()
     }
 
-    fun getRandomString(length: Int): String {
-
-        var upperCase = ""
-        var lowerCase = ""
-        var digits = ""
+    private fun getRandomString(): String {
         characters = ""
 
-        if (checkedUpper) {
-            upperCase = "ABCDEFGHIJKLMNOPQRSTUVXZ"
+        val upperCase: String = if (checkedUpper) {
+            "ABCDEFGHIJKLMNOPQRSTUVXZ"
         } else {
-            upperCase = ""
+            ""
         }
 
-        if (checkedLower) {
-            lowerCase = "abcdefghijklmnopqrstuvxz"
+        val lowerCase: String = if (checkedLower) {
+            "abcdefghijklmnopqrstuvxz"
         } else {
-            lowerCase = ""
+            ""
         }
 
-        if (checkedDigits) {
-            digits = "0123456789"
+        val digits: String = if (checkedDigits) {
+            "0123456789"
         } else {
-            digits = ""
+            ""
         }
 
         if (checkedSpecial) {
@@ -242,7 +272,7 @@ class MainActivity : AppCompatActivity() {
             characters = ""
         }
 
-        var finalCharacters = upperCase + lowerCase + digits + characters
+        val finalCharacters = upperCase + lowerCase + digits + characters
 
         return if (finalCharacters != "") {
             getRandomValue(finalCharacters)
