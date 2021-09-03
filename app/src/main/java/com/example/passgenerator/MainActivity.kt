@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
     private var checkedLower = true
     private var checkedDigits = true
     private var checkedSpecial = true
-    private var characters = ""
+    private var characters = "~!@#\$%^&;*+-/.,\\{}[]();:|?=\"`"
 
     private var strong = true
 
@@ -43,6 +43,8 @@ class MainActivity : AppCompatActivity() {
         binding.switchLower.isChecked = true
         binding.switchDigits.isChecked = true
         binding.switchSpecial.isChecked = true
+
+        binding.special.setText(characters)
 
         // Set them on startup
         setTheme()
@@ -105,7 +107,7 @@ class MainActivity : AppCompatActivity() {
         // 1 digito
         // 2 caracteres especiais
 
-        if (characters != "~!@#$%^&;*+-/.,\\{}[]();:|?=\"`") {
+        if (characters != "~!@#\$%^&;*+-/.,\\{}[]();:|?=\"`") {
             strong = false
             setStrongFalse()
         }
@@ -125,7 +127,7 @@ class MainActivity : AppCompatActivity() {
                 if (it.isDigit()) {
                     passDigits = true
                 }
-                val chama = "~!@#$%^&;*+-/.,\\{}[]();:|?=\"`"
+                val chama = "~!@#\$%^&;*+-/.,\\{}[]();:|?=\"`"
                 for (i in chama) {
                     if (i == it) {
                         passCharacters = true
@@ -164,8 +166,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun resetSpecialCharacters() {
-        if (characters != "~!@#$%^&;*+-/.,\\{}[]();:|?=\"`") {
-            characters = "~!@#$%^&;*+-/.,\\{}[]();:|?=\"`"
+        if (characters != "~!@#\$%^&;*+-/.,\\{}[]();:|?=\"`") {
+            characters = "~!@#\$%^&;*+-/.,\\{}[]();:|?=\"`"
         }
         binding.special.setText(characters)
     }

@@ -5,7 +5,7 @@
     <string name="clear">CLEAR</string>
     <string name="_10">10</string>
     <string name="letters_lowercase_a_z">Letters Lowercase (a-z)</string>
-    <string name="amp"><![CDATA[~!@#$%^&;*+-/.,\\{}[]();:|?=`]]></string>
+    <string name="amp"><![CDATA[~!@#$%^&;*+-/.,\{}[]();:|?="`]]></string>
     <string name="strong_password">Strong password</string>
     <string name="password_length">Password length:</string>
     <string name="letters_uppercase_a_z">Letters Uppecase (A-Z)</string>
