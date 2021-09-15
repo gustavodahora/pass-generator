@@ -67,6 +67,7 @@ class MainActivity : AppCompatActivity() {
         binding.switchUpper.setOnClickListener { strongPassword() }
         binding.switchDigits.setOnClickListener { strongPassword() }
         binding.switchSpecial.setOnClickListener { strongPassword() }
+        binding.switchLower.setOnClickListener { strongPassword() }
         binding.forceUse.setOnClickListener { strongPassword() }
         binding.restoreSpecial.setOnClickListener { resetSpecialCharacters() }
 
