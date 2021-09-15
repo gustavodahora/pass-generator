@@ -14,4 +14,5 @@
     <string name="get_a_new_password">Get a new password</string>
     <string name="length_of_characters">Length of characters</string>
     <string name="special_characters_selected">special characters selected</string>
+    <string name="copy_to_clipboard">copied to clipboard</string>
 </resources>

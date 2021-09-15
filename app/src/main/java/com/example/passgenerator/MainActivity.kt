@@ -234,7 +234,7 @@ class MainActivity : AppCompatActivity() {
             val clip = ClipData.newPlainText("label", textField)
             clipboardManager.setPrimaryClip(clip)
             Toast.makeText(
-                applicationContext, "$textField copiado para o clipboard",
+                applicationContext, "$textField " + getString(R.string.copy_to_clipboard),
                 Toast.LENGTH_SHORT
             ).show()
         }
