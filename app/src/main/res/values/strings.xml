@@ -15,4 +15,5 @@
     <string name="length_of_characters">Length of characters</string>
     <string name="special_characters_selected">special characters selected</string>
     <string name="copy_to_clipboard">copied to clipboard</string>
+    <string name="remove_strong_to_continue">Remove strong password to continue.</string>
 </resources>

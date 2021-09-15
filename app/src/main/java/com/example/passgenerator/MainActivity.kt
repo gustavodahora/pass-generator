@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
 import com.example.passgenerator.databinding.ActivityMainBinding
+import com.google.android.material.snackbar.Snackbar
 
 
 class MainActivity : AppCompatActivity() {
@@ -68,6 +69,7 @@ class MainActivity : AppCompatActivity() {
         binding.switchSpecial.setOnClickListener { strongPassword() }
         binding.forceUse.setOnClickListener { strongPassword() }
         binding.restoreSpecial.setOnClickListener { resetSpecialCharacters() }
+
     }
 
 
@@ -206,6 +208,12 @@ class MainActivity : AppCompatActivity() {
                     R.color.yellow
                 )
             )
+
+            val snackbar = Snackbar.make(findViewById(R.id.scr_view), getString(R.string.remove_strong_to_continue), Snackbar.LENGTH_LONG)
+            snackbar.setBackgroundTint(ContextCompat.getColor(applicationContext, android.R.color.black))
+            snackbar.setTextColor(ContextCompat.getColor(applicationContext, android.R.color.white))
+            snackbar.show()
+
         } else {
             binding.forceUseLabel.setTextColor(
                 ContextCompat.getColor(

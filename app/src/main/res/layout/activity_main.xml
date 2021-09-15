@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:id="@+id/scr_view"
+    >
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -35,6 +37,7 @@
             android:layout_marginRight="16dp"
             android:drawableStart="@drawable/ic_baseline_bedtime_24"
             android:drawableLeft="@drawable/ic_baseline_bedtime_24"
+            app:layout_constraintBottom_toBottomOf="@+id/app_title"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/app_title"
             app:layout_constraintTop_toTopOf="parent" />
@@ -46,6 +49,7 @@
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
             android:contentDescription="@string/get_a_new_password"
+            app:layout_constraintBottom_toBottomOf="@+id/passwordText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/passwordText"
             app:srcCompat="@drawable/ic_baseline_autorenew_24" />
@@ -145,8 +149,8 @@
 
         <TextView
             android:id="@+id/switch_uppercase_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="163dp"
+            android:layout_height="24dp"
             android:layout_marginTop="15dp"
             android:text="@string/letters_uppercase_a_z"
             android:textColor="?android:attr/textColorPrimary"
