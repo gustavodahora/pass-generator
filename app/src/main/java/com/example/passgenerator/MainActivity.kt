@@ -181,8 +181,6 @@ class MainActivity : AppCompatActivity() {
     private fun strongPassword() {
         setStrong()
 
-        resetSpecialCharacters()
-
         val allChecked = checkedUpper && checkedLower && checkedDigits && checkedSpecial
 
         if (!allChecked) {
