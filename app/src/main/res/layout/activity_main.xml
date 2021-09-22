@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginHorizontal="10dp"
     android:id="@+id/scr_view"
     >
 
@@ -141,22 +142,22 @@
             android:layout_height="20dp"
             android:layout_marginStart="24dp"
             android:layout_marginLeft="24dp"
-            android:layout_marginTop="4dp"
-            app:layout_constraintBottom_toBottomOf="@id/switch_uppercase_label"
-            app:layout_constraintEnd_toStartOf="@+id/switch_uppercase_label"
+            android:layout_marginTop="24dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/switch_uppercase_label" />
+            app:layout_constraintTop_toBottomOf="@+id/password_lenght_label" />
 
         <TextView
             android:id="@+id/switch_uppercase_label"
             android:layout_width="163dp"
             android:layout_height="24dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
             android:text="@string/letters_uppercase_a_z"
             android:textColor="?android:attr/textColorPrimary"
             android:textSize="16sp"
-            app:layout_constraintStart_toEndOf="@id/switchLower"
-            app:layout_constraintTop_toBottomOf="@+id/password_lenght_label" />
+            app:layout_constraintBottom_toBottomOf="@+id/switch_upper"
+            app:layout_constraintStart_toEndOf="@+id/switch_upper"
+            app:layout_constraintTop_toTopOf="@+id/switch_upper" />
 
         <com.google.android.material.switchmaterial.SwitchMaterial
             android:id="@+id/switchLower"
@@ -164,23 +165,23 @@
             android:layout_height="20dp"
             android:layout_marginStart="24dp"
             android:layout_marginLeft="24dp"
-            android:layout_marginTop="4dp"
-            app:layout_constraintBottom_toBottomOf="@id/letters_lowercase_label"
-            app:layout_constraintEnd_toStartOf="@+id/letters_lowercase_label"
+            android:layout_marginTop="8dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/letters_lowercase_label" />
+            app:layout_constraintTop_toBottomOf="@+id/switch_upper" />
+
 
         <TextView
             android:id="@+id/letters_lowercase_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
             android:text="@string/letters_lowercase_a_z"
             android:textColor="?android:attr/textColorPrimary"
             android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/switchLower"
             app:layout_constraintStart_toEndOf="@id/switchLower"
-            app:layout_constraintTop_toBottomOf="@+id/switch_upper" />
-
+            app:layout_constraintTop_toTopOf="@+id/switchLower" />
 
         <com.google.android.material.switchmaterial.SwitchMaterial
             android:id="@+id/switchDigits"
@@ -188,21 +189,22 @@
             android:layout_height="20dp"
             android:layout_marginStart="24dp"
             android:layout_marginLeft="24dp"
-            app:layout_constraintBottom_toBottomOf="@id/digits_label"
-            app:layout_constraintEnd_toStartOf="@+id/digits_label"
+            android:layout_marginTop="8dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/digits_label" />
+            app:layout_constraintTop_toBottomOf="@+id/switchLower" />
 
         <TextView
             android:id="@+id/digits_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
             android:text="@string/digits_0_9"
             android:textColor="?android:attr/textColorPrimary"
             android:textSize="16sp"
-            app:layout_constraintStart_toEndOf="@id/switchLower"
-            app:layout_constraintTop_toBottomOf="@+id/switchLower" />
+            app:layout_constraintBottom_toBottomOf="@+id/switchDigits"
+            app:layout_constraintStart_toEndOf="@+id/switchDigits"
+            app:layout_constraintTop_toTopOf="@+id/switchDigits" />
 
         <com.google.android.material.switchmaterial.SwitchMaterial
             android:id="@+id/switchSpecial"
@@ -210,37 +212,37 @@
             android:layout_height="20dp"
             android:layout_marginStart="24dp"
             android:layout_marginLeft="24dp"
-            app:layout_constraintBottom_toBottomOf="@id/special"
-            app:layout_constraintEnd_toStartOf="@+id/special"
+            android:layout_marginTop="12dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/special" />
+            app:layout_constraintTop_toBottomOf="@+id/switchDigits" />
+
 
         <EditText
             android:id="@+id/special"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
             android:autofillHints="@string/special_characters_selected"
             android:ems="10"
             android:hint="@string/special_characters_selected"
             android:inputType="textPersonName"
             android:text="@string/amp"
-            app:layout_constraintEnd_toStartOf="@+id/restore_special"
-            app:layout_constraintStart_toEndOf="@id/switchSpecial"
-            app:layout_constraintTop_toBottomOf="@+id/digits_label" />
+            app:layout_constraintBottom_toBottomOf="@+id/switchSpecial"
+            app:layout_constraintStart_toEndOf="@+id/switchSpecial"
+            app:layout_constraintTop_toTopOf="@+id/switchSpecial"
+             />
 
         <ImageButton
             android:id="@+id/restore_special"
             android:layout_width="47dp"
             android:layout_height="44dp"
-            android:layout_marginStart="4dp"
-            android:layout_marginLeft="4dp"
+            android:layout_marginTop="1dp"
             android:contentDescription="@string/restore_text_special"
             app:layout_constraintBottom_toBottomOf="@+id/special"
-            app:layout_constraintStart_toEndOf="@id/special"
-            app:layout_constraintTop_toTopOf="@id/special"
+            app:layout_constraintStart_toEndOf="@+id/special"
+            app:layout_constraintTop_toTopOf="@+id/special"
             app:srcCompat="@drawable/ic_baseline_settings_backup_restore_24" />
-
 
         <com.google.android.material.switchmaterial.SwitchMaterial
             android:id="@+id/force_use"
@@ -248,23 +250,25 @@
             android:layout_height="20dp"
             android:layout_marginStart="24dp"
             android:layout_marginLeft="24dp"
+            android:layout_marginTop="16dp"
             android:theme="@style/BrandedSwitch"
-            app:layout_constraintBottom_toBottomOf="@+id/force_use_label"
-            app:layout_constraintEnd_toStartOf="@+id/force_use_label"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/force_use_label" />
+            app:layout_constraintTop_toBottomOf="@+id/switchSpecial" />
 
         <TextView
             android:id="@+id/force_use_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
             android:text="@string/strong_password"
             android:textColor="@color/teal_200"
             android:textSize="16sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@id/force_use"
-            app:layout_constraintTop_toBottomOf="@+id/special" />
+            app:layout_constraintBottom_toBottomOf="@+id/force_use"
+            app:layout_constraintStart_toEndOf="@+id/force_use"
+            app:layout_constraintTop_toTopOf="@+id/force_use"
+            app:layout_constraintVertical_bias="0.0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
