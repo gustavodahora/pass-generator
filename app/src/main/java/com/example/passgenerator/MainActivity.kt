@@ -255,6 +255,7 @@ class MainActivity : AppCompatActivity() {
             applicationContext, "Clean",
             Toast.LENGTH_SHORT
         ).show()
+        binding.passwordText.text = getString(R.string.passTemporary)
     }
 
     private fun getRandomString(): String {
