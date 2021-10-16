@@ -28,10 +28,15 @@ class MainActivity : AppCompatActivity() {
     private var checkedLower = true
     private var checkedDigits = true
     private var checkedSpecial = true
+    private var checkedMinLength = true
+
+    private var minLength = 8
+
     private var characters = "~!@#\$%^&;*+-/.,\\{}[]();:|?=\"`"
 
     private var strong = true
     private var clean = true
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -73,18 +78,22 @@ class MainActivity : AppCompatActivity() {
         binding.switchUpper.setOnClickListener {
             strongPassword()
             itemLabelChange()
+            snackRemove()
         }
         binding.switchDigits.setOnClickListener {
             strongPassword()
             itemLabelChange()
+            snackRemove()
         }
         binding.switchSpecial.setOnClickListener {
             strongPassword()
             itemLabelChange()
+            snackRemove()
         }
         binding.switchLower.setOnClickListener {
             strongPassword()
             itemLabelChange()
+            snackRemove()
         }
         binding.forceUse.setOnClickListener { strongPassword() }
         binding.restoreSpecial.setOnClickListener { resetSpecialCharacters() }
@@ -136,6 +145,7 @@ class MainActivity : AppCompatActivity() {
             )
             snackbar.show()
         } else {
+            strongPassword()
             setAllParameters()
 
             val passValue = getRandomString()
@@ -222,11 +232,16 @@ class MainActivity : AppCompatActivity() {
 
     private fun strongPassword() {
         setStrong()
+        var lengthActual = Integer.parseInt(binding.passLength.text.toString())
 
-        val allChecked = checkedUpper && checkedLower && checkedDigits && checkedSpecial
+        checkedMinLength = lengthActual >= minLength
+
+        val allChecked = checkedUpper && checkedLower && checkedDigits && checkedSpecial && checkedMinLength
 
         if (!allChecked) {
             setStrongFalse()
+        } else {
+            setColorStrong()
         }
     }
 
@@ -249,25 +264,6 @@ class MainActivity : AppCompatActivity() {
                     R.color.yellow
                 )
             )
-
-            val snackbar = Snackbar.make(
-                findViewById(R.id.scr_view),
-                getString(R.string.remove_strong_to_continue),
-                Snackbar.LENGTH_LONG
-            )
-            snackbar.setBackgroundTint(
-                ContextCompat.getColor(
-                    applicationContext,
-                    android.R.color.black
-                )
-            )
-            snackbar.setTextColor(
-                ContextCompat.getColor(
-                    applicationContext,
-                    android.R.color.white
-                )
-            )
-            snackbar.show()
             itemLabelChange()
 
         } else {
@@ -444,5 +440,39 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    private fun setColorStrong() {
+        binding.forceUseLabel.setTextColor(
+            ContextCompat.getColor(
+                applicationContext,
+                R.color.yellow
+            )
+        )
+        binding.forceUse.isChecked = true
+    }
+
+    private fun snackRemove() {
+        strong = binding.forceUse.isChecked
+
+        if (strong) {
+            val snackbar = Snackbar.make(
+                findViewById(R.id.scr_view),
+                getString(R.string.remove_strong_to_continue),
+                Snackbar.LENGTH_LONG
+            )
+            snackbar.setBackgroundTint(
+                ContextCompat.getColor(
+                    applicationContext,
+                    android.R.color.black
+                )
+            )
+            snackbar.setTextColor(
+                ContextCompat.getColor(
+                    applicationContext,
+                    android.R.color.white
+                )
+            )
+            snackbar.show()
+        }
+    }
 }
 
