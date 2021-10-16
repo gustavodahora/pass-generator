@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId 'dev.gustavodahora.passgenerator'
-        minSdkVersion 16
+        minSdkVersion 23
         targetSdkVersion 31
         versionCode 1
         versionName "1.0"

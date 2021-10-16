@@ -3,6 +3,7 @@
     <string name="copy">Copy</string>
     <string name="passTemporary">Press >></string>
     <string name="clear">CLEAR</string>
+    <string name="cleaned">The clipboard has been cleaned</string>
     <string name="_10">10</string>
     <string name="letters_lowercase_a_z">Letters Lowercase (a-z)</string>
     <string name="amp"><![CDATA[~!@#$%^&;*+-/.,\{}[]();:|?="`]]></string>
@@ -16,4 +17,5 @@
     <string name="special_characters_selected">special characters selected</string>
     <string name="copy_to_clipboard">copied to clipboard</string>
     <string name="remove_strong_to_continue">Remove strong password to continue.</string>
+    <string name="already_is_clean">The clipboard already is clean.</string>
 </resources>

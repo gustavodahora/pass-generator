@@ -15,30 +15,12 @@
         <item name="android:textColorPrimary">@color/black</item>
     </style>
 
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">#3F51B5</item>
-        <item name="colorPrimaryDark">#303F9F</item>
-        <item name="colorAccent">#FF4081</item>
+    <style name="switchForce">
+        <item name="colorSecondary">@color/yellow</item>
     </style>
 
-    <style name="BrandedSwitch.control" parent="Theme.AppCompat.Light">
-        <!-- active thumb & track color (30% transparency) -->
-        <item name="colorControlActivated">#e6e600</item>
-        <item name="colorSwitchThumbNormal">#cc0000</item>
+    <style name="switchNight">
+        <item name="colorSecondary">@color/black</item>
     </style>
 
-    <style name="BrandedSwitch.text" parent="Theme.AppCompat.Light">
-        <item name="android:textColor">#ffa000</item>
-        <item name="android:textSize">9dp</item>
-    </style>
-
-    <style name="BrandedCheckBox" parent="AppTheme">
-        <item name="colorAccent">#aaf000</item>
-        <item name="colorControlNormal">#ff0000</item>
-    </style>
-
-    <style name="BrandedSwitch" parent="AppTheme">
-        <item name="colorAccent">@color/yellow</item>
-    </style>
 </resources>

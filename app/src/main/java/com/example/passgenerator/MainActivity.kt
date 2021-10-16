@@ -26,6 +26,7 @@ class MainActivity : AppCompatActivity() {
     private var characters = "~!@#\$%^&;*+-/.,\\{}[]();:|?=\"`"
 
     private var strong = true
+    private var clean = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -103,6 +104,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getRandomValue(allowedChars: String): String {
+        clean = false
         return (1..length)
             .map { allowedChars.random() }
             .joinToString("")
@@ -208,16 +210,20 @@ class MainActivity : AppCompatActivity() {
                 )
             )
 
-            val snackbar = Snackbar.make(findViewById(R.id.scr_view), getString(R.string.remove_strong_to_continue), Snackbar.LENGTH_LONG)
-            snackbar.setBackgroundTint(ContextCompat.getColor(applicationContext, android.R.color.black))
-            snackbar.setTextColor(ContextCompat.getColor(applicationContext, android.R.color.white))
+            val snackbar = Snackbar.make(findViewById(R.id.scr_view),
+                getString(R.string.remove_strong_to_continue),
+                Snackbar.LENGTH_LONG)
+            snackbar.setBackgroundTint(ContextCompat.getColor(applicationContext,
+                android.R.color.black))
+            snackbar.setTextColor(ContextCompat.getColor(applicationContext,
+                android.R.color.white))
             snackbar.show()
 
         } else {
             binding.forceUseLabel.setTextColor(
                 ContextCompat.getColor(
                     applicationContext,
-                    R.color.teal_200
+                    R.color.gray
                 )
             )
         }
@@ -229,7 +235,7 @@ class MainActivity : AppCompatActivity() {
         binding.forceUseLabel.setTextColor(
             ContextCompat.getColor(
                 applicationContext,
-                R.color.teal_200
+                R.color.gray
             )
         )
     }
@@ -251,11 +257,27 @@ class MainActivity : AppCompatActivity() {
         val clipboardManager = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
         val clip = ClipData.newPlainText("clear", " ")
         clipboardManager.setPrimaryClip(clip)
-        Toast.makeText(
-            applicationContext, "Clean",
-            Toast.LENGTH_SHORT
-        ).show()
-        binding.passwordText.text = getString(R.string.passTemporary)
+
+        if (clean) {
+            val snackbar = Snackbar.make(findViewById(R.id.scr_view),
+                getString(R.string.already_is_clean),
+                Snackbar.LENGTH_LONG)
+            snackbar.setBackgroundTint(ContextCompat.getColor(applicationContext,
+                android.R.color.black))
+            snackbar.setTextColor(ContextCompat.getColor(applicationContext,
+                android.R.color.white))
+            snackbar.show()
+        } else {
+            val snackbar = Snackbar.make(findViewById(R.id.scr_view),
+                getString(R.string.cleaned), Snackbar.LENGTH_LONG)
+            snackbar.setBackgroundTint(ContextCompat.getColor(applicationContext,
+                android.R.color.black))
+            snackbar.setTextColor(ContextCompat.getColor(applicationContext,
+                android.R.color.white))
+            snackbar.show()
+            binding.passwordText.text = getString(R.string.passTemporary)
+        }
+        clean = true
     }
 
     private fun getRandomString(): String {
