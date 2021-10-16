@@ -122,7 +122,6 @@
             android:autofillHints="@string/_10"
             android:textStyle="bold"
             android:ems="10"
-            android:hint="@string/length_of_characters"
             android:inputType="number"
             android:maxLength="2"
             android:text="@string/_10"
