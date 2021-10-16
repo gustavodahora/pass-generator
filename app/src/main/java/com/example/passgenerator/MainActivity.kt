@@ -3,12 +3,17 @@ package com.example.passgenerator
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
+import android.graphics.Color
 import android.os.Bundle
+import android.util.TypedValue
 import android.widget.Toast
+import androidx.annotation.AttrRes
+import androidx.annotation.ColorInt
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
 import com.example.passgenerator.databinding.ActivityMainBinding
+import com.google.android.material.color.MaterialColors
 import com.google.android.material.snackbar.Snackbar
 
 
@@ -65,10 +70,22 @@ class MainActivity : AppCompatActivity() {
         binding.switchTheme.setOnClickListener { theme() }
         binding.btnCopy.setOnClickListener { copy() }
         binding.btnClear.setOnClickListener { clear() }
-        binding.switchUpper.setOnClickListener { strongPassword() }
-        binding.switchDigits.setOnClickListener { strongPassword() }
-        binding.switchSpecial.setOnClickListener { strongPassword() }
-        binding.switchLower.setOnClickListener { strongPassword() }
+        binding.switchUpper.setOnClickListener {
+            strongPassword()
+            itemLabelChange()
+        }
+        binding.switchDigits.setOnClickListener {
+            strongPassword()
+            itemLabelChange()
+        }
+        binding.switchSpecial.setOnClickListener {
+            strongPassword()
+            itemLabelChange()
+        }
+        binding.switchLower.setOnClickListener {
+            strongPassword()
+            itemLabelChange()
+        }
         binding.forceUse.setOnClickListener { strongPassword() }
         binding.restoreSpecial.setOnClickListener { resetSpecialCharacters() }
 
@@ -210,14 +227,25 @@ class MainActivity : AppCompatActivity() {
                 )
             )
 
-            val snackbar = Snackbar.make(findViewById(R.id.scr_view),
+            val snackbar = Snackbar.make(
+                findViewById(R.id.scr_view),
                 getString(R.string.remove_strong_to_continue),
-                Snackbar.LENGTH_LONG)
-            snackbar.setBackgroundTint(ContextCompat.getColor(applicationContext,
-                android.R.color.black))
-            snackbar.setTextColor(ContextCompat.getColor(applicationContext,
-                android.R.color.white))
+                Snackbar.LENGTH_LONG
+            )
+            snackbar.setBackgroundTint(
+                ContextCompat.getColor(
+                    applicationContext,
+                    android.R.color.black
+                )
+            )
+            snackbar.setTextColor(
+                ContextCompat.getColor(
+                    applicationContext,
+                    android.R.color.white
+                )
+            )
             snackbar.show()
+            itemLabelChange()
 
         } else {
             binding.forceUseLabel.setTextColor(
@@ -225,6 +253,62 @@ class MainActivity : AppCompatActivity() {
                     applicationContext,
                     R.color.gray
                 )
+            )
+            itemLabelChange()
+        }
+    }
+
+    private fun itemLabelChange() {
+        checkedUpper = binding.switchUpper.isChecked
+        checkedLower = binding.switchLower.isChecked
+        checkedDigits = binding.switchDigits.isChecked
+        checkedSpecial = binding.switchSpecial.isChecked
+        if (!checkedUpper) {
+            binding.switchUppercaseLabel.setTextColor(
+                ContextCompat.getColor(
+                    applicationContext,
+                    R.color.gray
+                )
+            )
+        } else {
+            binding.switchUppercaseLabel.setTextColor(
+                MaterialColors.getColor(binding.switchUppercaseLabel, R.attr.colorOnSecondary)
+            )
+        }
+        if (!checkedLower) {
+            binding.lettersLowercaseLabel.setTextColor(
+                ContextCompat.getColor(
+                    applicationContext,
+                    R.color.gray
+                )
+            )
+        } else {
+            binding.lettersLowercaseLabel.setTextColor(
+                MaterialColors.getColor(binding.switchUppercaseLabel, R.attr.colorOnSecondary)
+            )
+        }
+        if (!checkedDigits) {
+            binding.digitsLabel.setTextColor(
+                ContextCompat.getColor(
+                    applicationContext,
+                    R.color.gray
+                )
+            )
+        } else {
+            binding.digitsLabel.setTextColor(
+                MaterialColors.getColor(binding.switchUppercaseLabel, R.attr.colorOnSecondary)
+            )
+        }
+        if (!checkedSpecial) {
+            binding.special.setTextColor(
+                ContextCompat.getColor(
+                    applicationContext,
+                    R.color.gray
+                )
+            )
+        } else {
+            binding.special.setTextColor(
+                MaterialColors.getColor(binding.switchUppercaseLabel, R.attr.colorOnSecondary)
             )
         }
     }
@@ -259,21 +343,41 @@ class MainActivity : AppCompatActivity() {
         clipboardManager.setPrimaryClip(clip)
 
         if (clean) {
-            val snackbar = Snackbar.make(findViewById(R.id.scr_view),
+            val snackbar = Snackbar.make(
+                findViewById(R.id.scr_view),
                 getString(R.string.already_is_clean),
-                Snackbar.LENGTH_LONG)
-            snackbar.setBackgroundTint(ContextCompat.getColor(applicationContext,
-                android.R.color.black))
-            snackbar.setTextColor(ContextCompat.getColor(applicationContext,
-                android.R.color.white))
+                Snackbar.LENGTH_LONG
+            )
+            snackbar.setBackgroundTint(
+                ContextCompat.getColor(
+                    applicationContext,
+                    android.R.color.black
+                )
+            )
+            snackbar.setTextColor(
+                ContextCompat.getColor(
+                    applicationContext,
+                    android.R.color.white
+                )
+            )
             snackbar.show()
         } else {
-            val snackbar = Snackbar.make(findViewById(R.id.scr_view),
-                getString(R.string.cleaned), Snackbar.LENGTH_LONG)
-            snackbar.setBackgroundTint(ContextCompat.getColor(applicationContext,
-                android.R.color.black))
-            snackbar.setTextColor(ContextCompat.getColor(applicationContext,
-                android.R.color.white))
+            val snackbar = Snackbar.make(
+                findViewById(R.id.scr_view),
+                getString(R.string.cleaned), Snackbar.LENGTH_LONG
+            )
+            snackbar.setBackgroundTint(
+                ContextCompat.getColor(
+                    applicationContext,
+                    android.R.color.black
+                )
+            )
+            snackbar.setTextColor(
+                ContextCompat.getColor(
+                    applicationContext,
+                    android.R.color.white
+                )
+            )
             snackbar.show()
             binding.passwordText.text = getString(R.string.passTemporary)
         }
@@ -317,5 +421,14 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-
+    @ColorInt
+    fun Context.getColorFromAttr(
+        @AttrRes attrColor: Int,
+        typedValue: TypedValue = TypedValue(),
+        resolveRefs: Boolean = true
+    ): Int {
+        theme.resolveAttribute(attrColor, typedValue, resolveRefs)
+        return typedValue.data
+    }
 }
+
