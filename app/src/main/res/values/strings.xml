@@ -18,4 +18,5 @@
     <string name="copy_to_clipboard">copied to clipboard</string>
     <string name="remove_strong_to_continue">Remove strong password to continue.</string>
     <string name="already_is_clean">The clipboard already is clean.</string>
+    <string name="length_is_empty">The length is empty.</string>
 </resources>

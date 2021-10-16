@@ -114,10 +114,33 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun randomPass() {
-        setAllParameters()
+        val passLength = binding.passLength.text
 
-        val passValue = getRandomString()
-        setPassTextValue(passValue)
+        if (passLength.isBlank() || passLength.isEmpty()) {
+            val snackbar = Snackbar.make(
+                findViewById(R.id.scr_view),
+                getString(R.string.length_is_empty),
+                Snackbar.LENGTH_LONG
+            )
+            snackbar.setBackgroundTint(
+                ContextCompat.getColor(
+                    applicationContext,
+                    android.R.color.black
+                )
+            )
+            snackbar.setTextColor(
+                ContextCompat.getColor(
+                    applicationContext,
+                    android.R.color.white
+                )
+            )
+            snackbar.show()
+        } else {
+            setAllParameters()
+
+            val passValue = getRandomString()
+            setPassTextValue(passValue)
+        }
     }
 
     private fun getRandomValue(allowedChars: String): String {
@@ -421,14 +444,5 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    @ColorInt
-    fun Context.getColorFromAttr(
-        @AttrRes attrColor: Int,
-        typedValue: TypedValue = TypedValue(),
-        resolveRefs: Boolean = true
-    ): Int {
-        theme.resolveAttribute(attrColor, typedValue, resolveRefs)
-        return typedValue.data
-    }
 }
 
