@@ -20,7 +20,7 @@
     </style>
 
     <style name="switchNight">
-        <item name="colorSecondary">@color/black</item>
+        <item name="colorSecondary">@color/darker_gray</item>
     </style>
 
 </resources>
